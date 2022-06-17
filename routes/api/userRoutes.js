@@ -1,20 +1,36 @@
 const router = require("express").Router();
 
-const db = require("../models");
+const { User } = require("../../models/");
 
 // GET all users from /api/users
-router.get("/", (req, res) => {});
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // GET a single user from /api/users/:id
-router.get("/:id", (req, res) => {});
+router.get("/:id", async (req, res) => {});
 
 // POST a new user to /api/users
-router.post("/", (req, res) => {});
+router.post("/", async (req, res) => {
+  try {
+    const user = await User.create(req.body);
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // PUT an updated user into /api/users/:id
-router.put("/:id", (req, res) => {});
+router.put("/:id", async (req, res) => {});
 
 // DELETE a user from /api/users/:id
-router.delete("/:id", (req, res) => {});
+router.delete("/:id", async (req, res) => {});
 
 module.exports = router;

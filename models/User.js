@@ -14,7 +14,7 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       // trim: true,
-      match: [[/.+@.+\..+/, "Please enter a valid e-mail address."]],
+      match: [/.+@.+\..+/, "Please enter a valid e-mail address."],
     },
     thoughts: [
       {

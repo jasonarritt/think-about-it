@@ -1,5 +1,5 @@
 module.exports = {
-  Users: require("./User"),
-  Thoughts: require("./Thought"),
-  Reactions: require("./Reaction"),
+  User: require("./User"),
+  Thought: require("./Thought"),
+  Reaction: require("./Reaction"),
 };
