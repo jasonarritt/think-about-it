@@ -14,7 +14,15 @@ router.get("/", async (req, res) => {
 });
 
 // GET a single user from /api/users/:id
-router.get("/:id", async (req, res) => {});
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // POST a new user to /api/users
 router.post("/", async (req, res) => {
@@ -28,7 +36,15 @@ router.post("/", async (req, res) => {
 });
 
 // PUT an updated user into /api/users/:id
-router.put("/:id", async (req, res) => {});
+router.put("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id, req.body);
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // DELETE a user from /api/users/:id
 router.delete("/:id", async (req, res) => {});

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const { Thought } = require("../../models");
+const { Thought, User } = require("../../models");
 
 // GET all thoughts from /api/thoughts
 router.get("/", async (req, res) => {
@@ -14,13 +14,36 @@ router.get("/", async (req, res) => {
 });
 
 // GET a single thought from /api/thoughts/:id
-router.get("/api/thoughts/:id", async (req, res) => {});
+router.get("/api/thoughts/:id", async (req, res) => {
+  try {
+    const thought = await Thought.findById(req.params.id);
+    res.json(thought);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 // POST a new thought to /api/thoughts
 router.post("/", async (req, res) => {
   try {
-    const thought = await Thought.create(req.body);
-    res.json(thought);
+    const { thought: thoughtObj, userId } = req.body;
+
+    const thoughtData = await Thought.create(thoughtObj);
+
+    const updateData = await User.findByIdAndUpdate(
+      {
+        _id: userId,
+      },
+      {
+        $push: {
+          thoughts: thoughtData._id,
+        },
+      },
+      { new: true }
+    );
+
+    res.json(updateData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
