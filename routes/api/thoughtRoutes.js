@@ -101,6 +101,25 @@ router.post("/:id/reactions", async (req, res) => {
 });
 
 // DELETE a reaction from /api/thoughts/:id/reactions/:reactionId
-router.delete("/:id/reactions/:reactionId", async (req, res) => {});
+router.delete("/:id/reactions/:reactionId", async (req, res) => {
+  try {
+    await Thought.findOneAndUpdate(
+      { _id: req.params.id },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
+      { new: true }
+    ).then((dbThoughtData) => {
+      if (!dbThoughtData) {
+        res
+          .status(404)
+          .json({ message: "No thought or reaction found with that ID." });
+        return;
+      }
+      res.json(dbThoughtData);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
