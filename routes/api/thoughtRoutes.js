@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 // GET a single thought from /api/thoughts/:id
-router.get("/api/thoughts/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const thought = await Thought.findById(req.params.id);
     res.json(thought);
