@@ -51,9 +51,20 @@ router.post("/", async (req, res) => {
 });
 
 // PUT an updated thought into /api/thoughts/:id
-router.put("/:id", async (req, res) => {});
+router.put("/:id", async (req, res) => {
+  // try {
+  //     const { thought: thoughtObj, userId } = req.body;
+});
 
 // DELETE a new thought from /api/thoughts/:id
-router.delete("/:id", async (req, res) => {});
+router.delete("/:id", async (req, res) => {
+  try {
+    const thought = await Thought.findByIdAndDelete(req.params.id);
+    res.json(thought);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
