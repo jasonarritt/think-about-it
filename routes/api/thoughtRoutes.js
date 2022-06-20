@@ -83,9 +83,17 @@ router.delete("/:id", async (req, res) => {
 // POST a new reaction to /api/thoughts/:id/reactions
 router.post("/:id/reactions", async (req, res) => {
   try {
-    const { reaction: reactionObj, userId } = req.body;
-
-    const thoughtData = await Thought.findByIdAndUpdate();
+    await Thought.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $push: { reactions: req.body } },
+      { new: true, runValidators: true }
+    ).then((dbThoughtData) => {
+      if (!dbThoughtData) {
+        res.status(404).json({ message: "No thought found with that ID." });
+        return;
+      }
+      res.json(dbThoughtData);
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
