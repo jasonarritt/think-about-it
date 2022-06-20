@@ -65,4 +65,10 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// POST a new friend to /api/users/:id/friends/:friendId
+router.post("/:id/friends", async (req, res) => {});
+
+// DELETE a friend from /api/users/:id/friends/:friendId
+router.delete("/:id/friends/:friendId", async (req, res) => {});
+
 module.exports = router;

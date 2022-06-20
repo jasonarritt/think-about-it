@@ -92,4 +92,7 @@ router.post("/:id/reactions", async (req, res) => {
   }
 });
 
+// DELETE a reaction from /api/thoughts/:id/reactions/:reactionId
+router.delete("/:id/reactions/:reactionId", async (req, res) => {});
+
 module.exports = router;
