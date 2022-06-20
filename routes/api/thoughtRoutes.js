@@ -69,7 +69,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// DELETE a new thought from /api/thoughts/:id
+// DELETE a thought from /api/thoughts/:id
 router.delete("/:id", async (req, res) => {
   try {
     const thought = await Thought.findByIdAndDelete(req.params.id);

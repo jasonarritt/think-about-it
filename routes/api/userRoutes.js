@@ -38,8 +38,16 @@ router.post("/", async (req, res) => {
 // PUT an updated user into /api/users/:id
 router.put("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id, req.body);
-    res.json(user);
+    await User.findByIdAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+      runValidators: true,
+    }).then((dbUserData) => {
+      if (!dbUserData) {
+        res.status(404).json({ message: "No user found with that ID." });
+        return;
+      }
+      res.json(dbUserData);
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
