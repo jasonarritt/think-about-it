@@ -90,7 +90,7 @@ router.delete("/:id/friends/:friendId", async (req, res) => {
   try {
     await User.findOneAndUpdate(
       { _id: req.params.id },
-      { $pull: { friends: { friendId: req.params.friendId } } },
+      { $pull: { friends: req.params.friendId } },
       { new: true }
     ).then((dbUserData) => {
       if (!dbUserData) {
