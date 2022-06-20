@@ -66,11 +66,11 @@ router.delete("/:id", async (req, res) => {
 });
 
 // POST a new friend to /api/users/:id/friends/:friendId
-router.post("/:id/friends/", async (req, res) => {
+router.post("/:id/friends/:friendId", async (req, res) => {
   try {
     await User.findByIdAndUpdate(
       { _id: req.params.id },
-      { $push: { friends: req.body.id } },
+      { $push: { friends: req.params.friendId } },
       { new: true, runValidators: true }
     ).then((dbUserData) => {
       if (!dbUserData) {
