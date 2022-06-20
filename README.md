@@ -27,6 +27,12 @@ Currently, Installing Think About It requires a user to clone the GitHub reposit
 
 Upon starting the Think About It application the user should then navigate to Insomnia or their service of choice. From there the user can run the different API route calls to manipulate the database. The following video provides a visual demonstration of running the different API route options using Insomnia:
 
+
+
+https://user-images.githubusercontent.com/98424788/174687001-911ced16-589c-4e12-8cfc-2af049dd5a25.mp4
+
+
+
 ## License
 
 Copyright 2022 jasonarritt
